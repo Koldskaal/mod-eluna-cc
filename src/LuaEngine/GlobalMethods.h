@@ -3491,5 +3491,65 @@ namespace LuaGlobalFunctions
         return 0;
     }
     #endif
+
+    int GetTalentCount(lua_State *L) {
+        Eluna::Push(L, sTalentStore.GetNumRows());
+        return 1;
+    }
+
+    /**
+     * Gets the talent entry
+     *
+     *
+     * @return uint32 the Row of the talent
+     * @return uint32 the Col of the talent
+     * @return uint32 index in TalentTab.dbc (TalentTabEntry)
+     * @return uint32 index in Talent.dbc (TalentEntry)
+     * @return uint32 rank min
+     * @return uint32 spellId of rank1 or nil
+     * @return uint32 spellId of rank2 or nil
+     * @return uint32 spellId of rank3 or nil
+     * @return uint32 spellId of rank4 or nil
+     * @return uint32 spellId of rank5 or nil
+     */
+    int GetTalentEntry(lua_State *L)
+    {
+        uint32 index = Eluna::CHECKVAL<uint32>(L, 1);
+
+        TalentEntry const *talentInfo = sTalentStore.LookupEntry(index);
+        if (talentInfo)
+        {
+            Eluna::Push(L, talentInfo->Row);
+            Eluna::Push(L, talentInfo->Col);
+            Eluna::Push(L, talentInfo->TalentTab);
+            Eluna::Push(L, talentInfo->DependsOn);
+            Eluna::Push(L, talentInfo->DependsOnRank);
+
+            // uint32 spellId = 0;
+            uint8 rankId = 0;
+            
+            for (int8 rank = 0; rank <= MAX_TALENT_RANK; rank++)
+            {
+                if (talentInfo->RankID[rank] == 0)
+                {
+                    break;
+                }
+
+                Eluna::Push(L, talentInfo->RankID[rank]);
+                rankId++;
+            }
+
+            return 5 + rankId;
+        }
+
+        return 0;
+
+        // TalentTabEntry const *talentTabInfo = sTalentTabStore.LookupEntry(talentInfo->TalentTab);
+        // if (!talentTabInfo)
+        //     continue;
+
+        // if ((classMask & talentTabInfo->ClassMask) == 0)
+        //     continue;
+    }
 }
 #endif

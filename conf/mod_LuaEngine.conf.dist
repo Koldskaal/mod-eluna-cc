@@ -27,7 +27,8 @@
 
 Eluna.Enabled = true
 Eluna.TraceBack = false
-Eluna.ScriptPath = "lua_scripts"
+# Eluna.ScriptPath = "/azerothcore/env/dist/scripts/lua"
+Eluna.ScriptPath = "/root/azerothcore-wotlk/lua_scripts"
 Eluna.PlayerAnnounceReload = false
 
 

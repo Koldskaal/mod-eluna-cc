@@ -306,6 +306,7 @@ ElunaRegister<Unit> UnitMethods[] =
         {"GetStandState", &LuaUnit::GetStandState},
         {"GetVictim", &LuaUnit::GetVictim},
         {"GetSpeed", &LuaUnit::GetSpeed},
+        {"GetSpeedRate", &LuaUnit::GetSpeedRate},
         {"GetStat", &LuaUnit::GetStat},
         {"GetBaseSpellPower", &LuaUnit::GetBaseSpellPower},
 #if (!defined(TBC) && !defined(CLASSIC))
@@ -328,6 +329,7 @@ ElunaRegister<Unit> UnitMethods[] =
         {"SetFacing", &LuaUnit::SetFacing},
         {"SetFacingToObject", &LuaUnit::SetFacingToObject},
         {"SetSpeed", &LuaUnit::SetSpeed},
+        {"SetSpeedRate", &LuaUnit::SetSpeedRate},
         // {"SetStunned", &LuaUnit::SetStunned},                           // :SetStunned([enable]) - UNDOCUMENTED - Stuns or removes stun
         {"SetRooted", &LuaUnit::SetRooted},
         {"SetConfused", &LuaUnit::SetConfused},
@@ -400,6 +402,7 @@ ElunaRegister<Unit> UnitMethods[] =
 #endif
 
         // Other
+        {"HandleStatModifier", &LuaUnit::HandleStatModifier},
         {"AddAura", &LuaUnit::AddAura},
         {"RemoveAura", &LuaUnit::RemoveAura},
         {"RemoveAllAuras", &LuaUnit::RemoveAllAuras},
@@ -470,6 +473,7 @@ ElunaRegister<Player> PlayerMethods[] =
         {"GetGuild", &LuaPlayer::GetGuild},
         {"GetAccountId", &LuaPlayer::GetAccountId},
         {"GetAccountName", &LuaPlayer::GetAccountName},
+        {"GetCompletedQuestsCount", &LuaPlayer::GetCompletedQuestsCount},
 #if defined(TBC) || defined(WOTLK)
         {"GetArenaPoints", &LuaPlayer::GetArenaPoints},
         {"GetHonorPoints", &LuaPlayer::GetHonorPoints},
@@ -490,6 +494,8 @@ ElunaRegister<Player> PlayerMethods[] =
         {"GetRestBonus", &LuaPlayer::GetRestBonus},
 #ifdef WOTLK
         {"GetPhaseMaskForSpawn", &LuaPlayer::GetPhaseMaskForSpawn},
+        {"GetAchievementPoints", &LuaPlayer::GetAchievementPoints},
+        {"GetCompletedAchievementsCount", &LuaPlayer::GetCompletedAchievementsCount},
 #endif
         {"GetReqKillOrCastCurrentCount", &LuaPlayer::GetReqKillOrCastCurrentCount},
         {"GetQuestStatus", &LuaPlayer::GetQuestStatus},
@@ -567,6 +573,7 @@ ElunaRegister<Player> PlayerMethods[] =
         {"SetRankPoints", &LuaPlayer::SetRankPoints},
         {"SetHonorLastWeekStandingPos", &LuaPlayer::SetHonorLastWeekStandingPos},
 #endif
+        {"SetSpellPower", &LuaPlayer::SetSpellPower},
         {"SetLifetimeKills", &LuaPlayer::SetLifetimeKills},
         {"SetGameMaster", &LuaPlayer::SetGameMaster},
         {"SetGMChat", &LuaPlayer::SetGMChat},
@@ -592,6 +599,10 @@ ElunaRegister<Player> PlayerMethods[] =
 #endif
 
         // Boolean
+        {"HasTankSpec", &LuaPlayer::HasTankSpec},
+        {"HasMeleeSpec", &LuaPlayer::HasMeleeSpec},
+        {"HasCasterSpec", &LuaPlayer::HasCasterSpec},
+        {"HasHealSpec", &LuaPlayer::HasHealSpec},
         {"IsInGroup", &LuaPlayer::IsInGroup},
         {"IsInGuild", &LuaPlayer::IsInGuild},
         {"IsGM", &LuaPlayer::IsGM},
@@ -607,6 +618,8 @@ ElunaRegister<Player> PlayerMethods[] =
 #ifndef CLASSIC
         {"IsInArenaTeam", &LuaPlayer::IsInArenaTeam},
 #endif
+        {"CanRewardQuest", &LuaPlayer::CanRewardQuest},
+        {"CanCompleteRepeatableQuest", &LuaPlayer::CanCompleteRepeatableQuest},
         {"CanCompleteQuest", &LuaPlayer::CanCompleteQuest},
         {"CanEquipItem", &LuaPlayer::CanEquipItem},
         {"IsFalling", &LuaPlayer::IsFalling},
@@ -688,6 +701,7 @@ ElunaRegister<Player> PlayerMethods[] =
         {"ModifyMoney", &LuaPlayer::ModifyMoney},
         {"LearnSpell", &LuaPlayer::LearnSpell},
         {"LearnTalent", &LuaPlayer::LearnTalent},
+        {"SetGlyph", &LuaPlayer::SetGlyph},
 #if !defined(CLASSIC)
         {"RemoveArenaSpellCooldowns", &LuaPlayer::RemoveArenaSpellCooldowns},
 #endif
@@ -817,6 +831,8 @@ ElunaRegister<Creature> CreatureMethods[] =
         {"GetLootRecipient", &LuaCreature::GetLootRecipient},
         {"GetLootRecipientGroup", &LuaCreature::GetLootRecipientGroup},
         {"GetNPCFlags", &LuaCreature::GetNPCFlags},
+        {"GetUnitFlags", &LuaCreature::GetUnitFlags},
+        {"GetUnitFlagsTwo", &LuaCreature::GetUnitFlagsTwo},
         {"GetExtraFlags", &LuaCreature::GetExtraFlags},
 #if defined(CLASSIC) || defined(TBC) || defined(WOTLK)
         {"GetShieldBlockValue", &LuaCreature::GetShieldBlockValue},
@@ -842,6 +858,8 @@ ElunaRegister<Creature> CreatureMethods[] =
         {"SetLootMode", &LuaCreature::SetLootMode},
 #endif
         {"SetNPCFlags", &LuaCreature::SetNPCFlags},
+        {"SetUnitFlags", &LuaCreature::SetUnitFlags},
+        {"SetUnitFlagsTwo", &LuaCreature::SetUnitFlagsTwo},
 #if defined(TRINITY) || AZEROTHCORE
         {"SetReactState", &LuaCreature::SetReactState},
 #endif

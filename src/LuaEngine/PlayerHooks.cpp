@@ -690,3 +690,19 @@ void Eluna::OnGroupRollRewardItem(Player* player, Item* item, uint32 count, Roll
     Push(roll);
     CallAllFunctions(PlayerEventBindings, key);
 }
+
+void Eluna::OnBattlegroundDesertion(Player* player, const BattlegroundDesertionType type)
+{
+    START_HOOK(PLAYER_EVENT_ON_BG_DESERTION);
+    Push(player);
+    Push(type);
+    CallAllFunctions(PlayerEventBindings, key);
+}
+
+void Eluna::OnCreatureKilledByPet(Player* player, Creature* killed)
+{
+    START_HOOK(PLAYER_EVENT_ON_PET_KILL);
+    Push(player);
+    Push(killed);
+    CallAllFunctions(PlayerEventBindings, key);
+}

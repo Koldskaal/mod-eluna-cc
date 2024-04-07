@@ -2742,13 +2742,13 @@ namespace LuaPlayer
         float discountMod = Eluna::CHECKVAL<float>(L, 4, 1.0f);
 
 #ifdef CLASSIC
-        player->DurabilityRepair(position, takeCost, discountMod);
+        Eluna::Push(L, player->DurabilityRepair(position, takeCost, discountMod));
 #elif defined(TRINITY)
-        player->DurabilityRepair(position, takeCost, discountMod);
+        Eluna::Push(L, player->DurabilityRepair(position, takeCost, discountMod));
 #else
-        player->DurabilityRepair(position, takeCost, discountMod, false);
+        Eluna::Push(L, player->DurabilityRepair(position, takeCost, discountMod, false));
 #endif
-        return 0;
+        return 1;
     }
 
     /**

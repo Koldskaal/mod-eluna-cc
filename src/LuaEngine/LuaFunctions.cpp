@@ -1031,6 +1031,8 @@ ElunaRegister<Item> ItemMethods[] =
         // Other
         {"SaveToDB", &LuaItem::SaveToDB},
 
+        // CRAFTCRAFT
+        {"GetMaxDurability", &LuaItem::GetMaxDurability},
         {NULL, NULL}};
 
 ElunaRegister<ItemTemplate> ItemTemplateMethods[] =
